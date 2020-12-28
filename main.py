@@ -7,7 +7,11 @@ import argparse
 
 
 def extract_high_salary_df(pdf_path):
-    dfs = dfs_from_last_100_pages(pdf_path)
+    try:
+        dfs = dfs_from_last_100_pages(pdf_path)
+    except:
+        print(f'Problem reading pdf file {pdf_path}')
+        return None, None
     selected_df = select_high_salary_df(dfs)
     if not selected_df:
         print(f'Could not find a table for {pdf_path}')
