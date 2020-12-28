@@ -11,7 +11,7 @@ def extract_high_salary_df(pdf_path):
     selected_df = select_high_salary_df(dfs)
     if not selected_df:
         print(f'Could not find a table for {pdf_path}')
-        return
+        return None, None
     money_df = extract_money_column(selected_df)
     # names_df = extract_names_column(selected_df)
 
