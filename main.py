@@ -64,6 +64,8 @@ def extract_high_salaries_from_directory(directory):
     stats = pd.DataFrame(columns=['company'] + [f'{a}_{b}' for a in [13, 14, 18, 19] for b in ['max', 'min', 'mean']])
     for pdf_file in dir_path.glob('*.pdf'):
         whole_df, money_df = extract_high_salary_df(str(pdf_file))
+        if not whole_df:
+            continue
         year, company_name = pdf_file.stem.split('-')
         whole_df.to_csv(tables_dir_path / f'{pdf_file.stem}.csv', index=False)
         current_stats = money_df.describe()
